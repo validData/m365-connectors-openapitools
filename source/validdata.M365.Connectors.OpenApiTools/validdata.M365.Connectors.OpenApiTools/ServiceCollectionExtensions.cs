@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen(c =>
         {
             OpenApiSetup.ConfigureSwaggerGen(c, internalConfig);
-            internalConfig?.SwaggerGenAction?.Invoke(c);
+            internalConfig.SwaggerGenAction?.Invoke(c);
         });
     }
 }

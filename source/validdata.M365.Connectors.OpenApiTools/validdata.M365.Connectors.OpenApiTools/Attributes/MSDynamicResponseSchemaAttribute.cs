@@ -20,7 +20,8 @@ public class MSDynamicResponseSchemaAttribute(string operationId, string descrip
 
     public override void ApplyOperation(OperationFilterContext context, OpenApiOperation operation)
     {
-        operation.Responses["200"].Content.Add("OK",new OpenApiMediaType(){Schema =  new OpenApiSchema()
+        operation.Responses["200"].Content.Add("OK",new OpenApiMediaType
+        {Schema =  new OpenApiSchema()
         {
             Reference = new OpenApiReference
             {
