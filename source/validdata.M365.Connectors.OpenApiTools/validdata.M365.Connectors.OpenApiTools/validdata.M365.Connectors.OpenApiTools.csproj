@@ -10,9 +10,13 @@
         <PackageProjectUrl>https://github.com/validData/m365-connectors-openapitools</PackageProjectUrl>
         <PackageIconUrl>https://github.com/MauriceH/BlueprintDeck/raw/main/assets/nugeticon.png</PackageIconUrl>
         <PackageIcon>nugeticon.png</PackageIcon>
-        <Description></Description>
+        <Description>Toolset to customize OpenApi endpoint for Microsoft 365 Connectors</Description>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\..\..\assets\nugeticon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    
     <ItemGroup>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
