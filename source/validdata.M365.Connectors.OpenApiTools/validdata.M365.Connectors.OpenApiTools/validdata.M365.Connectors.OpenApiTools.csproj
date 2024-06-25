@@ -4,6 +4,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/validData/m365-connectors-openapitools</PackageProjectUrl>
+        <PackageIconUrl>https://github.com/MauriceH/BlueprintDeck/raw/main/assets/nugeticon.png</PackageIconUrl>
+        <PackageIcon>nugeticon.png</PackageIcon>
+        <Description></Description>
     </PropertyGroup>
 
     <ItemGroup>
