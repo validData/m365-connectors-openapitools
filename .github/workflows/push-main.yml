@@ -1,4 +1,4 @@
-name: .NET
+name: push-main
 
 on:
   push:
