@@ -16,4 +16,9 @@ public abstract class MSBaseAttribute : Attribute
     {
         
     }
+    
+    public virtual void ApplyProperty(OpenApiSchema schema)
+    {
+        
+    }
 }
