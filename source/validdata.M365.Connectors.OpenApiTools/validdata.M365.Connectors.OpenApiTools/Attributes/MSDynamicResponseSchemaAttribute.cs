@@ -20,20 +20,11 @@ public class MSDynamicResponseSchemaAttribute(string operationId, string descrip
 
     public override void ApplyOperation(OperationFilterContext context, OpenApiOperation operation)
     {
-        operation.Responses["200"].Content.Add("OK",new OpenApiMediaType
-        {Schema =  new OpenApiSchema()
-        {
-            Reference = new OpenApiReference
+        operation.Responses["200"].Reference = new OpenApiReference
             {
                 Id = SchemaName,
                 Type = ReferenceType.Schema
-
-            }
-        }});
-        // operation.Responses["200"].Extensions["schema"] =  new OpenApiObject
-        // {
-        //     ["$ref"] = new OpenApiString($"#/definitions/{SchemaName}")
-        // };
+                };
     }
 
     public override void ApplyDocument(OpenApiDocument document, DocumentFilterContext context,
