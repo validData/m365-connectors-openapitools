@@ -9,6 +9,7 @@ public interface ISetupOptions
     string? BasePath { get; set; }
     string? Title { get; set; }
     string? Description { get; set; }
+    string? Version { get; set; }
     void IncludeXmlCommentsForAssembly(Assembly assembly);
     void AuthenticateWithAzureAdDefaults();
     void RemoveOperationsWithoutVisibilityAttribute();
