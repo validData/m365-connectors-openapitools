@@ -6,11 +6,12 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace validdata.M365.Connectors.OpenApiTools.Attributes;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class MSDynamicResponseSchemaAttribute(string operationId, string description, params string[] parameterName)
+public class MSDynamicResponseSchemaAttribute(string operationId, string description, string responseMimeType, params string[] parameterName)
     : MSBaseAttribute
 {
     private string SchemaName => $"{OperationId}OperationSchema";
-
+   
+    
     // ReSharper disable MemberCanBePrivate.Global
     public string OperationId { get; } = operationId;
     public string Description { get; } = description;
@@ -20,11 +21,17 @@ public class MSDynamicResponseSchemaAttribute(string operationId, string descrip
 
     public override void ApplyOperation(OperationFilterContext context, OpenApiOperation operation)
     {
-        operation.Responses["200"].Reference = new OpenApiReference
+        operation.Responses["200"].Content[responseMimeType] = new OpenApiMediaType
+        {
+            Schema = new OpenApiSchema
             {
-                Id = SchemaName,
-                Type = ReferenceType.Schema
-                };
+                Reference = new OpenApiReference
+                {
+                    Id = SchemaName,
+                    Type = ReferenceType.Schema
+                }
+            }
+        };
     }
 
     public override void ApplyDocument(OpenApiDocument document, DocumentFilterContext context,
