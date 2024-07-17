@@ -42,6 +42,10 @@ internal static class ReferenceFinder
             {
                 AddEntries(paths, AddToCheck);
             }
+            if (current is OpenApiRequestBody body)
+            {
+                AddEntries(body, AddToCheck);
+            }
             if (current is OpenApiMediaType mediaType)
             {
                 AddEntries(mediaType, AddToCheck);
@@ -110,7 +114,16 @@ internal static class ReferenceFinder
             toCheck(item.Schema);
         }
     }
-
+    private static void AddEntries(OpenApiRequestBody item, Action<IOpenApiElement> toCheck)
+    {
+        if (item.Content != null)
+        {
+            foreach (var openApiMediaType in item.Content.Values)
+            {
+                toCheck(openApiMediaType);
+            }    
+        }
+    }
     private static void AddEntries(OpenApiResponse item, Action<IOpenApiElement> toCheck)
     {
         item.Content.Values.ToList().ForEach(toCheck);
@@ -163,7 +176,7 @@ internal static class ReferenceFinder
         {
             toCheck(openApiParameter);
         }
-
+        
         item.Responses?.Values.ToList().ForEach(toCheck);
         item.Callbacks?.Values.ToList().ForEach(toCheck);
         if (item.RequestBody != null) toCheck(item.RequestBody);
