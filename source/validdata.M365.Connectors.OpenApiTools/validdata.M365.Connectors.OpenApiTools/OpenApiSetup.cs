@@ -30,6 +30,7 @@ internal class OpenApiSetup
         }
         
         options.OperationFilter<OpenApiOperationFilter>();
+        options.SchemaFilter<OpenApiSchemaFilter>();
         options.DocumentFilter<OpenApiDocumentFilter>(setupOptions);
 
         RegisterSpecialBodyForWebhookOperations(options);

@@ -9,11 +9,19 @@ public class OpenApiSchemaFilter : ISchemaFilter
 {
     public void Apply(OpenApiSchema schema, SchemaFilterContext context)
     {
+
+        schema.AdditionalPropertiesAllowed = true;
+        
+        context.Type?.GetCustomAttributes().Select(x => x as MSBaseAttribute)
+            .Where(x => x != null)
+            .ToList()
+            .ForEach(x => x!.ApplySchema(schema));
+
         if (schema.Properties == null)
         {
             return;
         }
-
+        
         foreach (var property in schema.Properties)
         {
             var attributes = context.Type
