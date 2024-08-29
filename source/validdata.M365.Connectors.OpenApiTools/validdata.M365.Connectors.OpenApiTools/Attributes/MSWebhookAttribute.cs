@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace validdata.M365.Connectors.OpenApiTools.Attributes;
 
 [AttributeUsage(AttributeTargets.All)]
-public class MSWebhookAttribute(string operationId, Type payloadType, string? description = null) : MSBaseAttribute
+public class MSWebhookAttribute(string operationId, Type payloadType, string? description = null, bool additionalProperties = true) : MSBaseAttribute
 {
     private readonly string _schemaName = $"webhook_{payloadType.Name}";
 
@@ -40,6 +40,7 @@ public class MSWebhookAttribute(string operationId, Type payloadType, string? de
         var openApiSchema = context.SchemaGenerator.GenerateSchema(payloadType, context.SchemaRepository);
         var generatedSchemaId = openApiSchema.Reference.Id;
         var schemaGenerated = document.Components.Schemas[generatedSchemaId];
+        schemaGenerated.AdditionalPropertiesAllowed = additionalProperties;
         document.Components.Schemas[_schemaName] = schemaGenerated;
         document.Components.Schemas.Remove(generatedSchemaId);
         filterContext.AddSchemaReference(new OpenApiReference{Id = _schemaName, Type = ReferenceType.Schema});
